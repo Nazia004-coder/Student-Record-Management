@@ -65,6 +65,7 @@ if (isset($_GET['edit'])) {
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="assets/style.css">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Student Record Management System</title>
 <link rel="stylesheet" href="assets/style.css">
