@@ -128,7 +128,7 @@ if ($search !== '') {
     $params = [$term, $term, $term];
 }
 
-$sql .= ' ORDER BY s.StudentID DESC';
+$sql .= ' ORDER BY s.StudentID ASC';
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
@@ -395,14 +395,16 @@ if (isset($_GET['edit'])) {
                 <thead>
 
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Department</th>
-                        <th>Semester</th>
-                        <th>CGPA</th>
-                        <th>Actions</th>
+                        
+                     <th>Student ID</th>
+<th>Student Name</th>
+<th>Department</th>
+<th>Semester</th>
+<th>CGPA</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Actions</th>
+   
                     </tr>
 
                 </thead>
@@ -417,16 +419,17 @@ if (isset($_GET['edit'])) {
 
                             <td><?= e($s['StudentName']) ?></td>
 
-                            <td><?= e($s['Email']) ?></td>
+                            
 
-                            <td><?= e($s['Phone']) ?></td>
+                            
 
                             <td><?= e($s['DepartmentName']) ?></td>
 
                             <td><?= e($s['Semester']) ?></td>
 
                             <td><?= e($s['CGPA']) ?></td>
-
+<td><?= e($s['Email']) ?></td>
+<td><?= e($s['Phone']) ?></td>
                             <td class="row-actions">
 
                                 <a href="?edit=<?= e($s['StudentID']) ?>">
