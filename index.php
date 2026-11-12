@@ -238,126 +238,117 @@ if (isset($_GET['edit'])) {
 
     <!-- Add / Update Student Form -->
 
-    <section class="panel">
+<section class="panel">
 
-        <h2>
-            <?= $editStudent ? 'Update Student' : 'Add New Student' ?>
-        </h2>
+    <h2>
+        <?= $editStudent ? 'Update Student' : 'Add New Student' ?>
+    </h2>
 
-        <form method="POST">
+    <form method="POST">
 
-            <input type="hidden" name="csrf"
-                   value="<?= e($_SESSION['csrf']) ?>">
+        <input type="hidden" name="csrf"
+               value="<?= e($_SESSION['csrf']) ?>">
 
-            <input type="hidden" name="action"
-                   value="<?= $editStudent ? 'update' : 'add' ?>">
+        <input type="hidden" name="action"
+               value="<?= $editStudent ? 'update' : 'add' ?>">
+
+        <?php if ($editStudent): ?>
+            <input type="hidden" name="id"
+                   value="<?= e($editStudent['StudentID']) ?>">
+        <?php endif; ?>
+
+        <div class="form-grid">
+
+            <label>
+                Student Name
+                <input
+                    type="text"
+                    name="name"
+                    required
+                    value="<?= e($editStudent['StudentName'] ?? '') ?>"
+                    placeholder="Enter student name">
+            </label>
+
+            <label>
+                Department
+                <select name="department" required>
+                    <option value="">Choose Department</option>
+
+                    <?php foreach ($departments as $d): ?>
+                        <option
+                            value="<?= e($d['DepartmentID']) ?>"
+                            <?= isset($editStudent['DepartmentID'])
+                            && $editStudent['DepartmentID'] == $d['DepartmentID']
+                            ? 'selected' : '' ?>>
+                            <?= e($d['DepartmentName']) ?>
+                        </option>
+                    <?php endforeach; ?>
+
+                </select>
+            </label>
+
+            <label>
+                Semester
+                <input
+                    type="number"
+                    name="semester"
+                    min="1"
+                    max="12"
+                    required
+                    value="<?= e($editStudent['Semester'] ?? '') ?>"
+                    placeholder="Enter semester">
+            </label>
+
+            <label>
+                CGPA
+                <input
+                    type="number"
+                    name="cgpa"
+                    min="0"
+                    max="4"
+                    step="0.01"
+                    value="<?= e($editStudent['CGPA'] ?? '') ?>"
+                    placeholder="Enter CGPA">
+            </label>
+
+            <label>
+                Email
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    value="<?= e($editStudent['Email'] ?? '') ?>"
+                    placeholder="Enter email address">
+            </label>
+
+            <label>
+                Phone
+                <input
+                    type="text"
+                    name="phone"
+                    value="<?= e($editStudent['Phone'] ?? '') ?>"
+                    placeholder="Enter phone number">
+            </label>
+
+        </div>
+
+        <div class="actions">
+
+            <button type="submit">
+                <?= $editStudent ? 'Update Student' : 'Add Student' ?>
+            </button>
 
             <?php if ($editStudent): ?>
-                <input type="hidden" name="id"
-                       value="<?= e($editStudent['StudentID']) ?>">
+                <a href="index.php" class="button secondary">
+                    Cancel
+                </a>
             <?php endif; ?>
 
-            <div class="form-grid">
+        </div>
 
-                <label>
-                    Student Name
-                    <input
-                        type="text"
-                        name="name"
-                        required
-                        value="<?= e($editStudent['StudentName'] ?? '') ?>"
-                        placeholder="Enter student name">
-                </label>
+    </form>
 
-                <label>
-                    Email
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                        value="<?= e($editStudent['Email'] ?? '') ?>"
-                        placeholder="Enter email address">
-                </label>
-
-                <label>
-                    Phone
-                    <input
-                        type="text"
-                        name="phone"
-                        value="<?= e($editStudent['Phone'] ?? '') ?>"
-                        placeholder="Enter phone number">
-                </label>
-
-                <label>
-                    Department
-
-                    <select name="department" required>
-
-                        <option value="">Choose Department</option>
-
-                        <?php foreach ($departments as $d): ?>
-
-                            <option
-                                value="<?= e($d['DepartmentID']) ?>"
-                                <?= isset($editStudent['DepartmentID'])
-                                && $editStudent['DepartmentID'] == $d['DepartmentID']
-                                ? 'selected' : '' ?>>
-
-                                <?= e($d['DepartmentName']) ?>
-
-                            </option>
-
-                        <?php endforeach; ?>
-
-                    </select>
-                </label>
-
-                <label>
-                    Semester
-                    <input
-                        type="number"
-                        name="semester"
-                        min="1"
-                        max="12"
-                        required
-                        value="<?= e($editStudent['Semester'] ?? '') ?>"
-                        placeholder="Enter semester">
-                </label>
-
-                <label>
-                    CGPA
-                    <input
-                        type="number"
-                        name="cgpa"
-                        min="0"
-                        max="4"
-                        step="0.01"
-                        value="<?= e($editStudent['CGPA'] ?? '') ?>"
-                        placeholder="Enter CGPA">
-                </label>
-
-            </div>
-
-            <div class="actions">
-
-                <button type="submit">
-                    <?= $editStudent ? 'Update Student' : 'Add Student' ?>
-                </button>
-
-                <?php if ($editStudent): ?>
-
-                    <a href="index.php" class="button secondary">
-                        Cancel
-                    </a>
-
-                <?php endif; ?>
-
-            </div>
-
-        </form>
-
-    </section>
-
+</section>
 
     <!-- Student Records -->
 
